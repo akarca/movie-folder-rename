@@ -6,7 +6,7 @@ print('-' * (31 * 3 + 14))
 
 for folder in folders():
     name = get_name(folder)
-    title, year = fetch_movie(name + " " + get_year)
+    title, year = fetch_movie(name + " " + get_year(folder))
     rename_to = ''
     action = 'Error'
     if title and year:
