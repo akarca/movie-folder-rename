@@ -89,8 +89,8 @@ def parse_year(html):
 
     return None
 
-def fetch_movie(name):
-    url = imdb_url(name)
+def fetch_movie(name, year=None):
+    url = imdb_url(name, year=year)
     html = crawl_imdb(url)
     title = parse_title(html)
     year = parse_year(html)
