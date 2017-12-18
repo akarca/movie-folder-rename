@@ -24,9 +24,9 @@ def get_year(path):
         if year > 1930 and year < 2020:
             return year
         else:
-            return ""
+            return None
     except Exception as e:
-        return ""
+        return None
 
 def get_name(path):
     path = clean_name(path)
@@ -42,8 +42,14 @@ def get_name(path):
 
     return path
 
-def imdb_url(path):
-    url = 'http://www.imdb.com/find?q=' + '+'.join(path.split(' '))
+def imdb_url(path, year=None):
+    # url = 'http://www.imdb.com/find?q=' + '+'.join(path.split(' '))
+
+    if year:
+        url = 'http://www.imdb.com/search/title?release_date=%s,%s&title=%s&view=simple' % (year, year, path)
+    else:
+        url = 'http://www.imdb.com/search/title?title=%s&view=simple' % path
+
     url = unicodedata.normalize('NFKD', url).encode('ascii', errors='ignore').decode('ascii')
 
     return url
@@ -135,3 +141,43 @@ def print_line(folder, year, title, rename_to, action):
             return string.ljust(length)
 
     print(format(folder), year.ljust(4), format(title), format(rename_to), action, flush=True)
+
+
+def renamed_already(path):
+    if re.match("[A-Za-z0-9_ ]+\([0-9]{4}\)$", path):
+        return True
+
+    return False
+
+def rename_folder(folder):
+    if renamed_already(folder):
+        return True
+
+    name = get_name(folder)
+    year_title = get_year(folder)
+
+    title, year = fetch_movie(name, year=year_title)
+    rename_to = ''
+    action = 'Error'
+    if title and year:
+        rename_to = title + ' (' + year + ')'
+        if folder == rename_to:
+            action = 'Equal'
+        elif compare_titles(name, title):
+            if rename(folder, rename_to):
+                action = 'Renamed'
+            else:
+                action = 'Error'
+        elif user_decision(name, title):
+            if rename(folder, rename_to):
+                action = 'Renamed'
+            else:
+                action = 'Error'
+        else:
+            action = 'Discarded'
+    else:
+        title = ''
+        year = ''
+        action = 'Not found'
+
+    print_line(folder, year, title, rename_to, action)
