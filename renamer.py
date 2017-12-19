@@ -56,7 +56,7 @@ def fetch_movie(name, year=None):
 
     if year is not None:
         for result in results:
-            if int(result.data["year"]) == int(year):
+            if "year" in result.data and int(result.data["year"]) == int(year):
                 return result.data["title"], result.data["year"]
 
     if results and len(results):
