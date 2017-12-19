@@ -96,7 +96,7 @@ def fetch_movie(name, year=None):
     #title = parse_title(html)
     #year = parse_year(html)
     ia = imdb.IMDb()
-    results = ia.search_movie('The Untouchables')
+    results = ia.search_movie(name)
 
     if year is not None:
         for result in results:
