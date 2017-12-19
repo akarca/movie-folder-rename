@@ -3,6 +3,7 @@ import re
 import codecs
 import urllib.request
 import unicodedata
+import imdb
 
 
 def folders():
@@ -90,12 +91,20 @@ def parse_year(html):
     return None
 
 def fetch_movie(name, year=None):
-    url = imdb_url(name, year=year)
-    html = crawl_imdb(url)
-    title = parse_title(html)
-    year = parse_year(html)
+    #url = imdb_url(name, year=year)
+    #html = crawl_imdb(url)
+    #title = parse_title(html)
+    #year = parse_year(html)
+    ia = imdb.IMDb()
+    results = ia.search_movie('The Untouchables')
 
-    return title, year
+    if year is not None:
+        for result in results:
+            if result.data["year"] == year:
+                return result.data["title"], result.data["year"]
+
+    return results[0].data["title"], results[0].data["year"]
+
 
 
 def strip_after(string, character):
