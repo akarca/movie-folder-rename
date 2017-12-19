@@ -109,7 +109,7 @@ def print_line(folder, year, title, rename_to, action):
 
 
 def renamed_already(path):
-    if re.match("[A-Za-z0-9\'\- ]+\([0-9]{4}\)$", path):
+    if re.match("[A-Za-z0-9\'\-\:\, ]+\([0-9]{4}\)$", path):
         return True
 
     return False
