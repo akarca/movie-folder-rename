@@ -11,7 +11,7 @@ def folders():
     return next(os.walk(os.curdir))[DIRECTORY]
 
 def clean_name(path):
-    remove_keys = ["BDRip", "BRRip", "NEW SOURCE", "LIMITED", "XviD", "H264", "AC3", "DVDSCR", "720P", "1080P", "HDRip", "DVDRip", "x264", "AAC", "6CH", "BluRay", "-ETRG", "WEB-DL", "WEBDL", "DD5", "-EVO", "-AMIABLE", "-JYK", "-iNFAMOUS", "-ALLiANCE", "-HANDJOB", "-FUM", "-EXTREME", "-FGT", "-POOP", "-PSA", "Feel-Free", "-Ozlem", "- EVO", "- AMIABLE", "- JYK", "- iNFAMOUS", "- ALLiANCE", "- HANDJOB", "- FUM", "- EXTREME", "- FGT", "- POOP", "- PSA", "-Feel-Free", "- Ozlem", "- ETRG", "-PTpOWeR", "- PTpOWeR", "-CODY", "- CODY", "-.Hon3y", "- .Hon3y", "-XvAvX", "- XvAvX", "-RARBG", "- RARBG", "-CM8", "- CM8", "-aNaRCHo", "- aNaRCHo"]
+    remove_keys = ["BDRip", "BRRip", "WEBRip", "mp4", "mp3", "NEW SOURCE", "LIMITED", "XviD", "H264", "AC3", "DVDSCR", "720P", "1080P", "HDRip", "DVDRip", "x264", "AAC", "6CH", "BluRay", "-ETRG", "WEB-DL", "WEBDL", "DD5", "-EVO", "-AMIABLE", "-JYK", "-iNFAMOUS", "-ALLiANCE", "-HANDJOB", "-FUM", "-EXTREME", "-FGT", "-POOP", "-PSA", "Feel-Free", "-Ozlem", "- EVO", "- AMIABLE", "- JYK", "- iNFAMOUS", "- ALLiANCE", "- HANDJOB", "- FUM", "- EXTREME", "- FGT", "- POOP", "- PSA", "-Feel-Free", "- Ozlem", "- ETRG", "-PTpOWeR", "- PTpOWeR", "-CODY", "- CODY", "-.Hon3y", "- .Hon3y", "-XvAvX", "- XvAvX", "-RARBG", "- RARBG", "-CM8", "- CM8", "-aNaRCHo", "- aNaRCHo"]
     for key in remove_keys:
         path = re.sub(re.escape(key), '', path, flags=re.IGNORECASE)
 
@@ -43,13 +43,18 @@ def get_name(path):
 
     return path
 
-def fetch_movie(name, year=None):
+def search_movie_name(name):
     ia = imdb.IMDb()
-    results = ia.search_movie(name)
+
+    return ia.search_movie(name)
+
+
+def fetch_movie(name, year=None):
+    results = search_movie_name(name)
 
     if year is not None:
         for result in results:
-            if result.data["year"] == year:
+            if int(result.data["year"]) == int(year):
                 return result.data["title"], result.data["year"]
 
     if results and len(results):
