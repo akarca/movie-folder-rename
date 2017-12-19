@@ -12,7 +12,7 @@ def folders():
     return next(os.walk(os.curdir))[DIRECTORY]
 
 def clean_name(path):
-    remove_keys = ["BDRip", "BRRip", "WEBRip", "VPPV", "HQ", "DTS", "Hive-CM8", "mp4", "mp3", "NEW SOURCE", "LIMITED", "XviD", "H264", "AC3", "DVDSCR", "720P", "1080P", "HDRip", "DVDRip", "x264", "AAC", "6CH", "BluRay", "-ETRG", "WEB-DL", "WEBDL", "DD5", "-EVO", "-AMIABLE", "-JYK", "-iNFAMOUS", "-ALLiANCE", "-HANDJOB", "-FUM", "-EXTREME", "-FGT", "-POOP", "-PSA", "Feel-Free", "-Ozlem", "- EVO", "- AMIABLE", "- JYK", "- iNFAMOUS", "- ALLiANCE", "- HANDJOB", "- FUM", "- EXTREME", "- FGT", "- POOP", "- PSA", "-Feel-Free", "- Ozlem", "- ETRG", "-PTpOWeR", "- PTpOWeR", "-CODY", "- CODY", "-.Hon3y", "- .Hon3y", "-XvAvX", "- XvAvX", "-RARBG", "- RARBG", "-CM8", "- CM8", "-aNaRCHo", "- aNaRCHo", "TommieCook", "-VLiS", "- VLiS"]
+    remove_keys = ["BDRip", "BRRip", "WEBRip", "HDDVD", "VPPV", "HQ", "DTS", "Hive-CM8", "mp4", "mp3", "NEW SOURCE", "LIMITED", "XviD", "H264", "AC3", "DVDSCR", "720P", "1080P", "HDRip", "DVDRip", "x264", "AAC", "6CH", "BluRay", "-ETRG", "WEB-DL", "WEBDL", "DD5", "-EVO", "-AMIABLE", "-JYK", "-iNFAMOUS", "-ALLiANCE", "-HANDJOB", "-FUM", "-EXTREME", "-FGT", "-POOP", "-PSA", "Feel-Free", "-Ozlem", "- EVO", "- AMIABLE", "- JYK", "- iNFAMOUS", "- ALLiANCE", "- HANDJOB", "- FUM", "- EXTREME", "- FGT", "- POOP", "- PSA", "-Feel-Free", "- Ozlem", "- ETRG", "-PTpOWeR", "- PTpOWeR", "-CODY", "- CODY", "-.Hon3y", "- .Hon3y", "-XvAvX", "- XvAvX", "-RARBG", "- RARBG", "-CM8", "- CM8", "-aNaRCHo", "- aNaRCHo", "TommieCook", "-VLiS", "- VLiS", "_sujaidr"]
     for key in remove_keys:
         path = re.sub(re.escape(key), '', path, flags=re.IGNORECASE)
 
@@ -35,6 +35,7 @@ def get_name(path):
     year = get_year(path)
 
     path = path.replace(".", " ")
+    path = path.replace("[]", "")
     path = re.sub('\[[^\]]+\]', '', path)
     path = re.sub("%s" % year, '', path)
     path = re.sub('\(\)', '', path)
