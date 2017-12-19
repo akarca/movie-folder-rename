@@ -149,7 +149,7 @@ def print_line(folder, year, title, rename_to, action):
         else:
             return string.ljust(length)
 
-    print(format(folder), year.ljust(4), format(title), format(rename_to), action, flush=True)
+    print(format(folder), year, format(title), format(rename_to), action, flush=True)
 
 
 def renamed_already(path):
@@ -166,10 +166,11 @@ def rename_folder(folder):
     year_title = get_year(folder)
 
     title, year = fetch_movie(name, year=year_title)
+
     rename_to = ''
     action = 'Error'
     if title and year:
-        rename_to = title + ' (' + year + ')'
+        rename_to = "%s (%s)" % (title, year)
         if folder == rename_to:
             action = 'Equal'
         elif compare_titles(name, title):
