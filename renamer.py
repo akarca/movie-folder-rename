@@ -1,7 +1,4 @@
 # coding=utf-8
-import sys
-sys.setdefaultencoding('utf8')
-
 import os
 import re
 import codecs
