@@ -84,7 +84,7 @@ def compare_titles(local, fetched):
 def user_decision(name, title):
     letter = None
     while not (letter == 'n' or letter == 'y'):
-        letter = input('Rename \'' + name + '\' to \'' + title + '\'? (y/n) '.encode("utf-8"))
+        letter = input('Rename \'' + name + '\' to \'' + title + '\'? (y/n) ')
 
     return letter == 'y'
 
