@@ -1,3 +1,8 @@
+# coding=utf-8
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 import os
 import re
 import codecs
@@ -83,7 +88,7 @@ def compare_titles(local, fetched):
 def user_decision(name, title):
     letter = None
     while not (letter == 'n' or letter == 'y'):
-        letter = input(unicode('> Rename \'' + name + '\' to \'' + title + '\'? (y/n) '))
+        letter = input('Rename \'' + name + '\' to \'' + title + '\'? (y/n) ')
 
     return letter == 'y'
 
