@@ -8,4 +8,4 @@ for folder in folders():
     rename_folder(folder)
 
 print('')
-os.system('DONE')
+print('DONE')
