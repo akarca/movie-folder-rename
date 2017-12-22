@@ -7,8 +7,8 @@ print_line('Input folder', 'Year', 'Title', 'Output folder', 'Action')
 print('-' * (31 * 3 + 14))
 
 args = sys.argv
-if len(args):
-    for folder in args:
+if len(args) > 1:
+    for folder in args[1:]
         rename_folder(folder)
 else:
     for folder in folders():
