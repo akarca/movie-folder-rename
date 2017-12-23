@@ -116,9 +116,6 @@ def renamed_already(path):
     return False
 
 def rename_folder(folder):
-    if renamed_already(folder):
-        return True
-
     name = get_name(folder)
     year_title = get_year(folder)
 
